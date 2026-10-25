@@ -1,0 +1,12 @@
+.DS_store
+.idea
+
+# Source materials kept locally, not part of the website
+/odi.tex
+/NeurIPSW_ODI_Poster.pdf
+/NeurIPSW_ODI_Poster.png
+/bar.svg
+/diagnosis.svg
+/teaser.svg
+/mag.png
+/parallel_ig.png

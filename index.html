@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="A 2.3M-parameter visual router for mobile agents, trained with zero real privacy-sensitive screenshots via diagnosis-driven, fine-grained screenshot synthesis.">
+  <meta name="keywords" content="Visual Routing, Mobile Agents, Screenshot Synthesis, On-Device, Lightweight Model, sVLM">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Towards Lightweight Visual Routing for Mobile Agents via Fine-Grained Screenshot Synthesis</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/mag.png">
+
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+
+  <style>
+    .title-icon {
+      height: 1.15em;
+      vertical-align: -0.22em;
+      margin-right: 0.2em;
+    }
+    .tldr-box {
+      background: #f5f5f5;
+      border-left: 5px solid #8a1c1c;
+      border-radius: 6px;
+      padding: 1.1rem 1.4rem;
+      font-size: 1.2rem;
+      line-height: 1.6;
+    }
+    .tldr-box .tldr-label {
+      font-family: 'Google Sans', sans-serif;
+      font-weight: 700;
+      color: #8a1c1c;
+      margin-right: 0.3rem;
+    }
+    .tldr-box b { color: #8a1c1c; }
+    .figure-caption {
+      font-size: 0.95rem;
+      color: #555;
+      margin-top: 0.6rem;
+    }
+    .result-table { font-size: 0.95rem; margin: 0 auto; background: transparent; }
+    .result-table th, .result-table td { text-align: right !important; white-space: nowrap; }
+    .result-table th:first-child, .result-table td:first-child { text-align: left !important; }
+    .result-table tr.is-ours td { font-weight: 700; background: #fdf1f1; }
+    .gap1 { color: #3f72c4; font-weight: 700; }
+    .gap2 { color: #6aa84f; font-weight: 700; }
+    .table-container { overflow-x: auto; }
+    img.figure { width: 100%; border-radius: 4px; }
+    .panel-labels {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      text-align: center;
+      font-family: 'Google Sans', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      margin-top: 0.3rem;
+    }
+  </style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-2 publication-title"><img src="./static/images/mag.png" class="title-icon" alt="">Towards Lightweight Visual Routing for Mobile Agents via Fine-Grained Screenshot Synthesis</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://sunnerli.github.io">Cheng-Che Lee</a>,</span>
+            <span class="author-block">
+              <a href="https://openreview.net/profile?id=~Chia-Pin_Cheng1">Chia-Pin Cheng</a>,</span>
+            <span class="author-block">
+              <a href="https://openreview.net/profile?id=~Hsu-Sheng_Chang1">Hsu-Sheng Chang</a>,</span>
+            <span class="author-block">
+              <a href="https://openreview.net/profile?id=~CHIALIN_CHOU1">Chia-Lin Chou</a></span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">Digital Innovation Laboratory, Chunghwa Telecom Laboratories, Taoyuan, Taiwan</span>
+            <br><span class="author-block"><b>NeurIPS 2026 Workshop on On-Device Intelligence: Foundation Models under Real-World Constraints</b></span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://openreview.net/pdf?id=umdC2BfHOe"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <!-- OpenReview Link. -->
+              <span class="link-block">
+                <a href="https://openreview.net/forum?id=umdC2BfHOe"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-open-access"></i>
+                  </span>
+                  <span>OpenReview</span>
+                </a>
+              </span>
+              <!-- Code Link: uncomment and fill in once the code is public.
+              <span class="link-block">
+                <a href="https://github.com/YOUR_ORG/YOUR_REPO"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                </a>
+              </span>
+              -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TL;DR + Teaser (white) -->
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body" style="padding-top: 0;">
+      <div class="tldr-box">
+        <span class="tldr-label">TL;DR:</span>
+        A <b>2.3M-parameter</b> router trained with <b>zero real privacy-sensitive screenshots</b>
+        reaches <b>71.62%</b> on real-world screenshots, above four zero-shot sVLMs up to
+        1,800&times; larger (best: PaliGemma 2 3B, 57.98%).
+      </div>
+      <br/>
+      <img src="./static/images/teaser.svg" class="figure"
+           alt="Visual routing with a general sVLM versus our lightweight router."/>
+      <h2 class="subtitle has-text-centered figure-caption">
+        <b>Visual routing</b> decides which tool a mobile agent should call. Left: a mainstream sVLM
+        misclassifies an instant-messaging screenshot as "Others" under zero-shot prompting.
+        Right: our lightweight router, trained with the proposed synthesis pipeline, correctly classifies it as "IM".
+      </h2>
+    </div>
+  </div>
+</section>
+
+
+<!-- Abstract (gray) -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Mobile agents rely heavily on visual routing&mdash;a perception-level decision task that determines
+            the UI context of the current screen in order to decide which downstream tool to invoke. For such
+            high-frequency, narrowly-scoped routing subtasks, continual reliance on general-purpose small
+            vision-language models (sVLMs) may impose disproportionate latency and resource overhead on edge
+            devices; we further find that mainstream sVLMs exhibit markedly limited zero-shot performance on
+            this structured task. We therefore argue for replacing sVLMs with a task-specific, ultra-lightweight
+            model (&lt;5M parameters) as the router. Training such a model, however, requires labeled data, and
+            real screenshots involving privacy-sensitive categories (SMS, instant messaging) are difficult to
+            obtain at scale&mdash;this data scarcity, not model architecture, is the central challenge this paper addresses.
+            We propose a diagnosis-driven, fine-grained screenshot synthesis methodology: unlike content-agnostic
+            conventional augmentation, we first characterize the visual distribution gap between synthetic and
+            real screenshots using multiple distribution-distance metrics, identifying conversation background
+            style and modern system UI rendering as two dominant sources. We hypothesize that reducing these two
+            gaps improves generalization, and accordingly design two targeted mechanisms&mdash;Bubble-blending and
+            modern SVG UI rendering&mdash;both of which are shown to reduce the identified gaps. A three-stage
+            progressive evaluation (learnability on synthetic data, transferability to unseen public apps, and
+            generalizability to real screenshots) yields results consistent with this hypothesis, with the
+            combined configuration giving the largest and most consistent gains across backbones, particularly on real data.
+            As one measure of the resulting model's practical utility, a 2.3M-parameter lightweight model trained
+            entirely on synthetic and public data&mdash;without a single privacy-sensitive real screenshot&mdash;achieves
+            71.62% accuracy on a real-world test set, outperforming four general-purpose sVLMs with over 100&times;
+            as many parameters evaluated under zero-shot prompting (e.g., PaliGemma 2 (3B), at 57.98%). These
+            results support diagnosis-driven synthesis as a practical route to training task-specific,
+            edge-deployable models under real-world data-access constraints.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Diagnosis (white) -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Diagnosis: Where Is the Gap?</h2>
+    <div class="content has-text-justified">
+      <p>
+        <b>We diagnose before we augment.</b> Our pipeline first uses Playwright to render naïve
+        conversation layouts across 10 phone brands &times; 10 resolutions. Comparing these naïve
+        synthetic screenshots with real ones, both qualitatively and with distribution-distance
+        metrics (FID, MMD, Cosine Distance), reveals two dominant gaps:
+      </p>
+      <ul>
+        <li><span class="gap1">Gap 1: Background style.</span> Naïve synthesis uses plain backgrounds, while real chats feature diverse themed wallpapers.</li>
+        <li><span class="gap2">Gap 2: UI rendering.</span> Naïve synthesis uses text placeholders, while real Android/iOS screens have modern status, navigation, and action bars.</li>
+      </ul>
+    </div>
+    <div class="columns is-vcentered">
+      <div class="column is-half has-text-centered">
+        <img src="./static/images/diagnosis.svg" class="figure"
+             alt="Naive synthesized screenshot versus a redacted real IM screenshot."/>
+        <p class="figure-caption">
+          Naïve synthesized screenshot (left) vs. a real IM screenshot (right; redacted).
+        </p>
+      </div>
+      <div class="column is-half">
+        <div class="table-container">
+          <table class="table is-narrow is-hoverable result-table">
+            <thead>
+              <tr><th>Configuration</th><th>FID &darr;</th><th>MMD &darr;</th><th>Cos. Dist. &darr;</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Naïve</td><td>108.02</td><td>0.1458</td><td>0.1066</td></tr>
+              <tr><td>+ Bubble-blending</td><td>107.32</td><td><b>0.1034</b></td><td>0.0839</td></tr>
+              <tr><td>+ SVG UI Rendering</td><td>105.91</td><td>0.1376</td><td>0.0998</td></tr>
+              <tr class="is-ours"><td>Full</td><td>100.56</td><td>0.1045</td><td>0.0819</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="figure-caption has-text-centered">
+          Distribution distance to real screenshots. Both mechanisms narrow the gap.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Method (gray) -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Method: Two Targeted Mechanisms</h2>
+    <img src="./static/images/method.png" class="figure"
+         alt="The same conversation under Naive, +SVG UI, +Bubble-blending, and Full configurations."/>
+    <div class="panel-labels">
+      <span>Naïve</span><span>+SVG UI</span><span>+Bubble-blending</span><span>Full</span>
+    </div>
+    <p class="figure-caption has-text-centered">
+      The same conversation rendered under the four synthesis configurations. Content and layout are held fixed.
+    </p>
+    <br/>
+    <div class="columns">
+      <div class="column content">
+        <h3 class="title is-5">(A) Bubble-blending &rarr; closes <span class="gap1">Gap 1</span></h3>
+        <p>
+          Chat bubbles are blended with <b>124 real themed backgrounds</b> (69 Instagram, 55 LINE).
+          The bubble color is darkened in HSL space based on the background's dominant hue to keep text readable.
+          This applies to instant messaging only, since SMS backgrounds are fixed to the system default.
+        </p>
+      </div>
+      <div class="column content">
+        <h3 class="title is-5">(B) Modern SVG UI Rendering &rarr; closes <span class="gap2">Gap 2</span></h3>
+        <p>
+          Character and emoji placeholders are replaced with fine-grained vector reconstructions of the
+          <b>status bar</b> (signal, battery, time), the <b>navigation bar</b> (call, video, camera), and the
+          <b>action bar</b> (microphone, gallery, stickers).
+        </p>
+      </div>
+    </div>
+    <div class="content has-text-justified">
+      <p>
+        <b>Privacy-safe training data.</b> SMS and IM screenshots are fully synthesized, and the <i>Other</i>
+        category comes from public datasets (RICO, MobileViews-600K). The resulting 8,100-image training set
+        contains zero real conversational screenshots.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- Results (white) -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Results: Three-Stage Evaluation</h2>
+    <div class="content has-text-justified">
+      <p>
+        We evaluate three lightweight backbones (EfficientViT-M0, MobileViT-XS, MobileNetV4-Conv-Small 0.5&times;)
+        on progressively harder test sets: <b>Synthesized</b> (learnability) &rarr; <b>Public UI</b> (unseen apps)
+        &rarr; <b>Wild Anti-Fraud</b> (821 real screenshots).
+      </p>
+      <ul>
+        <li><b>Synthesized:</b> Full improves F1 by more than 13 points on average over Naïve.</li>
+        <li><b>Public UI:</b> Precision stays at 1.00 for every configuration; no unseen-app screen is mistaken for IM.</li>
+        <li><b>Wild (real):</b> Full beats Naïve on all three backbones (+6.1 to +9.2 F1). The best model, EfficientViT-M0, reaches 71.62% accuracy.</li>
+        <li><b>Complementary mechanisms:</b> only Full drives both IM&rarr;Other and IM&rarr;SMS errors to their lowest points.</li>
+      </ul>
+    </div>
+    <img src="./static/images/bar.svg" class="figure"
+         alt="Accuracy and F1 on the Wild Anti-Fraud test set for three backbones under four synthesis configurations."/>
+    <p class="figure-caption has-text-centered">
+      Accuracy (left) and F1 (right) on the Wild Anti-Fraud test set (821 real screenshots).
+    </p>
+    <br/>
+    <div class="table-container">
+      <table class="table is-narrow is-hoverable result-table">
+        <thead>
+          <tr><th>Model</th><th>Params</th><th>Acc</th><th>Prec.</th><th>Rec.</th><th>F1</th></tr>
+        </thead>
+        <tbody>
+          <tr class="is-ours"><td>EfficientViT-M0 (Ours, Full)</td><td>2.3M</td><td>0.7162</td><td>0.5561</td><td>0.6653</td><td>0.5496</td></tr>
+          <tr><td>Moondream 2</td><td>0.5B</td><td>0.3666</td><td>0.4695</td><td>0.3222</td><td>0.1987</td></tr>
+          <tr><td>InternVL2.5</td><td>1B</td><td>0.4568</td><td>0.5093</td><td>0.5604</td><td>0.3508</td></tr>
+          <tr><td>PaliGemma 2</td><td>3B</td><td>0.5798</td><td>0.5092</td><td>0.6224</td><td>0.4577</td></tr>
+          <tr><td>Phi-3.5-vision</td><td>4.2B</td><td>0.3069</td><td>0.4208</td><td>0.5571</td><td>0.2330</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="figure-caption has-text-centered">
+      Comparison with sVLMs on the Wild Anti-Fraud test set. sVLMs use zero-shot CoT prompting; ours is trained on synthetic and public data only.
+    </p>
+  </div>
+</section>
+
+
+<!-- BibTeX (white) -->
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@inproceedings{lee2026lightweight,
+  author    = {Lee, Cheng-Che and Cheng, Chia-Pin and Chang, Hsu-Sheng and Chou, Chia-Lin},
+  title     = {Towards Lightweight Visual Routing for Mobile Agents via Fine-Grained Screenshot Synthesis},
+  booktitle = {NeurIPS 2026 Workshop on On-Device Intelligence: Foundation Models under Real-World Constraints},
+  year      = {2026},
+  url       = {https://openreview.net/forum?id=umdC2BfHOe}
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link" href="https://openreview.net/pdf?id=umdC2BfHOe">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content has-text-centered">
+          <p>
+            This website is adapted from the <a href="https://nerfies.github.io">Nerfies</a> project page
+            (<a href="https://github.com/nerfies/nerfies.github.io">source code</a>) and is licensed under a
+            <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons
+            Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
