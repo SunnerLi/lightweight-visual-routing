@@ -14,10 +14,10 @@ real-world screenshots, above four zero-shot sVLMs up to 1,800× larger (best: P
 ## Citation
 
 ```bibtex
-@inproceedings{lee2026lightweight,
+@inproceedings{lee2026towards,
   author    = {Lee, Cheng-Che and Cheng, Chia-Pin and Chang, Hsu-Sheng and Chou, Chia-Lin},
   title     = {Towards Lightweight Visual Routing for Mobile Agents via Fine-Grained Screenshot Synthesis},
-  booktitle = {NeurIPS 2026 Workshop on On-Device Intelligence: Foundation Models under Real-World Constraints},
+  booktitle = {On-Device Intelligence: Foundation Models under Real-World Constraints},
   year      = {2026},
   url       = {https://openreview.net/forum?id=umdC2BfHOe}
 }
